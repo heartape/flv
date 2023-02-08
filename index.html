@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>房间列表</title>
+</head>
+<body>
+    <script src="js/axios.min.js"></script>
+    <ul id="room-list"></ul>
+</body>
+<script>
+    const hostname = window.location.hostname;
+    axios.get('https://' + hostname + '/api/v1/streams')
+        .then(function (response) {
+            const list = response.data.streams;
+            const length = list.length;
+            let html = '<ul>';
+            for(let i = 0; i < length; i++) {
+                const app = list[i].app;
+                const name = list[i].name;
+                const path = '/' + app + '/' + name;
+                html += '<li><a href="/live.html?room=' + path + '" target="_parent">房间号:' + name + '</a></li>'
+            }
+            html += '</ul>';
+            document.write(html);
+        }).catch(function (error) {
+            console.log(error);
+        });
+</script>
+</html>

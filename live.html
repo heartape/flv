@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>直播间</title>
+</head>
+<body>
+    <script src="js/flv.min.js"></script>
+    <video id="videoElement"></video>
+    <script>
+        const hostname = window.location.hostname;
+        if (flvjs.isSupported()) {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            let room = urlParams.get('room');
+
+            const videoElement = document.getElementById('videoElement');
+            const flvPlayer = flvjs.createPlayer({
+                type: 'flv',
+                url: 'https://' + hostname + room + '.flv'
+            });
+            flvPlayer.attachMediaElement(videoElement);
+            flvPlayer.load();
+            try {
+                flvPlayer.play();
+            } catch (e) {
+                flvPlayer.play();
+            }
+        }
+    </script>
+</body>
+</html>

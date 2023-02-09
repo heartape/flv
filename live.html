@@ -8,6 +8,8 @@
     <script src="js/flv.min.js"></script>
     <video id="videoElement"></video>
     <script>
+        import {flvjs} from "./js/flv.min";
+
         const hostname = window.location.hostname;
         if (flvjs.isSupported()) {
             const queryString = window.location.search;
@@ -17,6 +19,7 @@
             const videoElement = document.getElementById('videoElement');
             const flvPlayer = flvjs.createPlayer({
                 type: 'flv',
+                // !!!
                 url: 'https://' + hostname + room + '.flv'
             });
             flvPlayer.attachMediaElement(videoElement);
